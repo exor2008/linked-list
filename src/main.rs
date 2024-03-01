@@ -1,9 +1,16 @@
-use rs_linked_list::list_unsafe::LinkedList;
+use linked_list::list_unsafe::LinkedList;
+use std::time::Instant;
 
 fn main() {
-    let _a = 5;
+    let now = Instant::now();
     let mut list = LinkedList::new();
-    list.push_left(3.0);
-    let el = list.pop_left().unwrap();
-    println!("Hello, world! {}", el);
+    for _ in 0..1000 {
+        for _ in 0..1000 {
+            list.push_left(3.0);
+        }
+        for _ in 0..1000 {
+            let _el = list.pop_left().unwrap();
+        }
+    }
+    println!("Done! {}", now.elapsed().as_micros());
 }
